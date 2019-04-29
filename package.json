@@ -1,0 +1,25 @@
+{
+  "name": "task-mgmt",
+  "version": "1.0.0",
+  "description": "A simple task management app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:server": "nodemon --ignore sessions/ server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "mongoose": "^5.5.4",
+    "mongoose-unique-validator": "^2.0.3",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "session-file-store": "^1.2.0",
+    "uuid": "^3.3.2"
+  }
+}
