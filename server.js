@@ -11,8 +11,20 @@ const bcrypt = require('bcrypt-nodejs');
 const mongoose = require("mongoose");
 const uniqueValidator = require('mongoose-unique-validator');
 
+// configuring the db
+const dbConfig = require('./config/database.config.js');
 
+mongoose.Promise = global.Promise;
 
+// connecting to db
+mongoose.connect(dbConfig.url, {
+    useNewUrlParser: true
+}).then(() => {
+    console.log("Successfully connected to database.");
+}).catch(err => {
+    console.log('Could not connect to database. Exiting now...', err);
+    process.exit();
+});
 
 /*
 // this is a dummy user (array containing one user object) used for testing instead of pulling from a database below using e.g. DB.findById()
