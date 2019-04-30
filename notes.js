@@ -4,7 +4,7 @@ https://medium.com/@evangow/server-authentication-basics-express-sessions-passpo
 
 
 -- Will need to refactor the final product to interact with Mongo instead of a json file, but that should be relatively easy to do -- just replicate the structure from the JSON file in a schema in the /models folder for users.
-    Don't forget to look into what's needed to store session info in a DB as well - he sets this up using 'session-store' middleware, which he uses to create a sessions folder locally (which causes nodemon to restart the server, which he then manually has nodemon ignore). 
+    Don't forget to look into what's needed to store session info in a DB as well (make this a field in the user model?) - he sets this up using 'session-store' middleware, which he uses to create a sessions folder locally (which causes nodemon to restart the server, which he then manually has nodemon ignore). 
 
 AUTHENTICATION
 I believe the way to set up the login/auth process is to get the user info (e.g. from login page), then save them as variables, and then interpolate/concatenate them into the db connection uri...

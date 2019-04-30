@@ -10,12 +10,15 @@ const axios = require('axios');
 const bcrypt = require('bcrypt-nodejs');
 const mongoose = require("mongoose");
 const uniqueValidator = require('mongoose-unique-validator');
+require('./routes/routes.js')(app);
+
 
 // configuring the db
 const dbConfig = require('./config/database.config.js');
 
 mongoose.Promise = global.Promise;
 
+/* Need to change the connect to DB to when the user logs in. Also need to change it so the connection string pulls username & pwd from the login page
 // connecting to db
 mongoose.connect(dbConfig.url, {
     useNewUrlParser: true
@@ -26,7 +29,7 @@ mongoose.connect(dbConfig.url, {
     process.exit();
 });
 
-/*
+
 // this is a dummy user (array containing one user object) used for testing instead of pulling from a database below using e.g. DB.findById()
 const users = [
     {id: '2f24vvg', email: 'test@test.com', password: 'password'}
@@ -91,7 +94,7 @@ app.use(passport.session());
 app.get('/', (req, res) => {
     console.log('Inside the homepage callback function....');
     console.log(req.sessionID);
-    res.send(`you hit the homepage.\n`);
+    res.render('index');
 });
 
 // create the login GET and POST routes
