@@ -16,12 +16,20 @@ OKAY..so after reading the task requirements, all that's needed is to allow user
 
 Another helpful auth info source (get current user info): https://stackoverflow.com/questions/39443459/display-specific-information-for-logged-in-user-in-express-js-mongodb
 
+According to the above, you can get the userId from the session - which should be pretty much set up already from the previous tut. 
+
+
+
 OTHER
 I will need to create a user field in the tasks model, and then run a check to see if it matches the current user before displaying or editing it. 
 
 ROUTING
 I have set up user.routes and task.routes that will allow DB manipulation using urls (CRUD).
 Will need to set up a user controller file or add it to the existing controller file.
+**** Note: don't forget! The whole point of routing/API setup is to basically say: If a user sends a POST to the /task url, then it should create a new task. So you don't really need to worry so much about getting the app 'perfect' - you are telling the server/DB what to do in these files! Just make sure to check the owner (and set correctly when creating notes) and should be good.
+
+Should make the entry point to the site the login page and reroute logged in users to a task list.
+
 
 CONTROLLERS
 I will probably have to add some more logic into both the controller files to pull the data from the webpages as opposed to the URL (or make sure the submit action sends the correct url string to perform the desired action..e.g. create task should send the title and contents)

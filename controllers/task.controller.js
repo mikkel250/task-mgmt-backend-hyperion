@@ -1,5 +1,7 @@
 const Task = require('../models/task.model.js');
-
+var currentUSer = req.session.userId;
+    
+    
 // create and save a new task
 exports.create = (req, res) => {
     // validate request
@@ -12,7 +14,9 @@ exports.create = (req, res) => {
     // create a task
     const task = new Task({
         title: req.body.title || "Untitled task",
-        content: req.body.content
+        content: req.body.content,
+        creator: currentUSer,
+        owner: req.body.creator || currentUSer
     });
 
     //save task in db
@@ -21,19 +25,19 @@ exports.create = (req, res) => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "An error occurred while creating the task :( "
+            message: err.message || "An error occurred while creating the task. "
         });
     });
 };
 
 // retrieve and return all tasks from the db
 exports.findAll = (req, res) => {
-    Task.find()
+    Task.find({ creator: currentUSer, owner: currentUSer })
     .then(tasks => {
         res.send(tasks);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while retrieving tasks :( "
+            message: err.message || "Some error occurred while retrieving tasks."
         });
     });
 };
@@ -47,7 +51,9 @@ exports.findOne = (req, res) => {
                 message: `task not found with id ${req.params.taskId}`
             });
         }
-        res.send(task);
+        if (task.owner === !currentUser || task.creator === !currentUser) {
+            res.status(400).send({ message: 'Sorry, only the task owner or creator can perform this action.' });
+        } else { res.send(task) };
     }).catch(err => {
         if (err.kind === 'ObjectId') {
             return res.status(404).send({
@@ -61,7 +67,11 @@ exports.findOne = (req, res) => {
 };
 
 // update a task identified by taskId in the request
-exports.update = (req, res) => {
+exports.update = (req, res) => {    
+    // Check if owner
+    if (task.owner === !currentUser || task.creator === !currentUser) {
+        res.status(400).send({ message: 'Sorry, only the task owner or creator can perform this action.' });
+    }
     //Validate request
     if (!req.body.content) {
         return res.status(400).send({
@@ -101,6 +111,10 @@ exports.delete = (req, res) => {
             return res.status(404).send({
                 message: `task not found with id ${req.params.taskId}`
             });
+        }
+        // Check if owner
+        if (task.owner === !currentUser || task.creator === !currentUser) {
+            res.status(400).send({ message: 'Sorry, only the task owner or creator can perform this action.' });
         }
         res.send({ message: "task deleted successfully!" });
     }).catch(err => {
