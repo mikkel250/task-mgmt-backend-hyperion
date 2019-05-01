@@ -1,9 +1,10 @@
 const Task = require('../models/task.model.js');
-var currentUSer = req.session.userId;
+
     
     
 // create and save a new task
 exports.create = (req, res) => {
+    let currentUSer = req.session.userId;
     // validate request
     if (!req.body.content) {
         return res.status(400).send({
@@ -32,6 +33,7 @@ exports.create = (req, res) => {
 
 // retrieve and return all tasks from the db
 exports.findAll = (req, res) => {
+    let currentUSer = req.session.userId;
     Task.find({ creator: currentUSer, owner: currentUSer })
     .then(tasks => {
         res.send(tasks);
@@ -44,6 +46,7 @@ exports.findAll = (req, res) => {
 
 // find a single task with taskId
 exports.findOne = (req, res) => {
+    let currentUSer = req.session.userId;
     Task.findById(req.params.taskId)
     .then(task => {
         if (!task) {
@@ -67,7 +70,8 @@ exports.findOne = (req, res) => {
 };
 
 // update a task identified by taskId in the request
-exports.update = (req, res) => {    
+exports.update = (req, res) => {
+    let currentUSer = req.session.userId;
     // Check if owner
     if (task.owner === !currentUser || task.creator === !currentUser) {
         res.status(400).send({ message: 'Sorry, only the task owner or creator can perform this action.' });
@@ -105,6 +109,7 @@ exports.update = (req, res) => {
 
 // delete a task with the specified taskId in the request
 exports.delete = (req, res) => {
+    let currentUSer = req.session.userId;
     Task.findByIdAndRemove(req.params.taskId)
     .then(task => {
         if (!task) {

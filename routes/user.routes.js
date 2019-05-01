@@ -1,12 +1,13 @@
 module.exports = (app) => {
-    const users = require('../controllers/task.controller.js');
+    const users = require('../controllers/user.controller.js');
     
     // retrieve all users
-    app.get('/task', users.findAll);
+    app.get('/user', users.findAll);
 
     //retrieve a single user with userId
-    app.get('/task/:taskId', users.findOne);
+    app.get('/user/:userId', users.findOne);
 
     //update a user with userId
-    app.put('/task/:taskId', users.update);
+    app.put('/user/:userId', users.update);
+
 }

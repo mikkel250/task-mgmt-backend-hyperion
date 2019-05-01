@@ -5,14 +5,12 @@ const TaskSchema = mongoose.Schema({
     content: String,
     creator: String,
     owner: String,
-
-},
     done: {
         type: Boolean
     },
+},
     {
         timestamps: true,
-        
     },
     {
         collection: 'tasks'

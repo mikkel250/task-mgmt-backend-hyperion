@@ -44,9 +44,12 @@ https://www.sitepoint.com/build-simple-beginner-app-node-bootstrap-mongodb/
 Older tut on Todo app: 
 https://webapplog.com/todo-app-with-express-jsnode-js-and-mongodb/
 
-todo that uses vue
+another todo, that uses vue
 https://dev.to/abiodunjames/build-a-todo-app-with-nodejs-expressjs-mongodb-and-vuejs--part-1--29n7
 
 Another todo-like, good beginner one with lots of explanation
 https://zellwk.com/blog/crud-express-mongodb/
+
+Specifically a task app (but still basic): 
+https://www.zeolearn.com/magazine/designing-a-rest-api-with-nodejs-and-mongodb-atlas
 */
