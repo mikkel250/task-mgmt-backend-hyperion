@@ -14,8 +14,31 @@ OKAY..so after reading the task requirements, all that's needed is to allow user
     So based on this, all that's required is to parse the url data sent with the form submission in the login screen and match that to what's in the database. 
     Could probably even leave off the bcrypt addition for now. 
 
+Another helpful auth info source (get current user info): https://stackoverflow.com/questions/39443459/display-specific-information-for-logged-in-user-in-express-js-mongodb
+
 OTHER
 I will need to create a user field in the tasks model, and then run a check to see if it matches the current user before displaying or editing it. 
 
+ROUTING
+I have set up user.routes and task.routes that will allow DB manipulation using urls (CRUD).
+Will need to set up a user controller file or add it to the existing controller file.
 
+CONTROLLERS
+I will probably have to add some more logic into both the controller files to pull the data from the webpages as opposed to the URL (or make sure the submit action sends the correct url string to perform the desired action..e.g. create task should send the title and contents)
+
+
+GENERAL GUIDE TO EXPRESS/NODE
+https://medium.freecodecamp.org/how-to-write-a-production-ready-node-and-express-app-f214f0b17d8c
+
+Another basic CRUD app: 
+https://www.sitepoint.com/build-simple-beginner-app-node-bootstrap-mongodb/
+
+Older tut on Todo app: 
+https://webapplog.com/todo-app-with-express-jsnode-js-and-mongodb/
+
+todo that uses vue
+https://dev.to/abiodunjames/build-a-todo-app-with-nodejs-expressjs-mongodb-and-vuejs--part-1--29n7
+
+Another todo-like, good beginner one with lots of explanation
+https://zellwk.com/blog/crud-express-mongodb/
 */

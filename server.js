@@ -1,5 +1,7 @@
 //npm modules
 const express = require('express');
+// create the server
+const app = express();
 const uuid = require('uuid/v4');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
@@ -10,7 +12,9 @@ const axios = require('axios');
 const bcrypt = require('bcrypt-nodejs');
 const mongoose = require("mongoose");
 const uniqueValidator = require('mongoose-unique-validator');
-require('./routes/routes.js')(app);
+// add the routers for CRUD of tasks, users
+require('./routes/task.routes.js')(app);
+require('./routes/user.routes.js')(app);
 
 
 // configuring the db
@@ -70,8 +74,7 @@ passport.deserializeUser((id, done) => {
     .catch(error => done(error, false))
 });
 
-// create the server
-const app = express();
+
 
 // add & configure middleware
 app.use(bodyParser.urlencoded({ extended: false })); // use body-parser middleware to parse urls
