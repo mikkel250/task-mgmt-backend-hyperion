@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:server": "nodemon --ignore sessions/ server.js"
+    "dev:server": "nodemon --ignore sessions/ server.js",
+    "dev:server3": "nodemon --ignore sessions/ server-v-1-3.js"
   },
   "author": "",
   "license": "ISC",

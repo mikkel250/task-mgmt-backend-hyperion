@@ -35,15 +35,16 @@ const users = [
  */
 
 // connecting to db
-mongoose.connect(dbConfig.url, {
-    useNewUrlParser: true
-}).then(() => {
-    console.log("Successfully connected to database.");
-}).catch(err => {
-    console.log('Could not connect to database. Exiting now...', err);
-    process.exit();
-});
-
+function connectToDB(username, password) {
+    mongoose.connect(`mongodb + srv://${username}:${password}@hyperion-kovej.mongodb.net/test?retryWrites=true`, {
+        useNewUrlParser: true
+    }).then(() => {
+        console.log("Successfully connected to database.");
+    }).catch(err => {
+        console.log('Could not connect to database. Exiting now...', err);
+        process.exit();
+    });
+}
 
 
 
@@ -74,7 +75,9 @@ app.post('/loginSubmit', (req, res) => {
      let username = req.body.username;
      let password = req.body.password;
     console.log(`inside login post callback. username: ${username}, password: ${password}`);
-    task.findOne({ username: username, password: password });
+    // trying to connect instead of using this method
+    //task.findOne({ username: username, password: password });
+    connectToDB(username, password);
 });
 
 // route that requires authentication
