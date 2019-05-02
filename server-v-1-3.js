@@ -14,9 +14,9 @@ const mongoose = require("mongoose");
 const uniqueValidator = require('mongoose-unique-validator');
 // add the routers for CRUD of tasks, users
 require('./routes/task.routes.js')(app);
-app.set('view engine', 'pug');
-// Don't think the below is needed
 //require('./routes/user.routes.js')(app);
+app.set('view engine', 'pug');
+
 
 
 // configuring the db --NOTE: MAY NEED TO JUST USE THE STRING HERE B/C OF PULLING FROM UI
@@ -71,13 +71,24 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.post('/loginSubmit', (req, res) => {
+app.post('/login', (req, res) => {
      let username = req.body.username;
      let password = req.body.password;
     console.log(`inside login post callback. username: ${username}, password: ${password}`);
-    // trying to connect instead of using this method
-    //task.findOne({ username: username, password: password });
-    connectToDB(username, password);
+    //trying to connect instead of using this method
+   // task.findOne({ username: username, password: password });
+    
+    mongoose.connect(`mongodb+srv://${username}:${password}@hyperion-kovej.mongodb.net/test?retryWrites=true`, {
+        useNewUrlParser: true
+    }).then(() => {
+        console.log("Successfully connected to database.");
+        res.send('Logged in.')
+    }).catch(err => {
+        console.log('Could not connect to database. Exiting now...', err);
+        process.exit();
+    });
+   // redirect to a different page just to test
+   
 });
 
 // route that requires authentication
