@@ -18,6 +18,9 @@ Another helpful auth info source (get current user info): https://stackoverflow.
 
 According to the above, you can get the userId from the session - which should be pretty much set up already from the previous tut. 
 
+OKAAAAY...SO    TURNS OUT I WAS THINKING ABOUT THIS ALL WRONG (well, it was never actually laid out which is part of problem). YOUR FUCKING USERS ARE JUST DATABASE OBJECTS SO YOU DON'T NEED TO WORRY ABOUT DICKING AROUND WITH ATLAS AT ALL, JUST CONNECT WITH A READ/WRITE ACCT!!!!!!!!!!!!!!!!!11
+THEN AT THE LOGIN SCREEN SEND A DB FINDONE WITH USERNAME AND PASSWORD FILTERS AND SEND ERROR IF DOESN'T WORK!!!
+
 
 
 OTHER
