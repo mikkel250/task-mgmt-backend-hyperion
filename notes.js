@@ -56,3 +56,7 @@ https://zellwk.com/blog/crud-express-mongodb/
 Specifically a task app (but still basic): 
 https://www.zeolearn.com/magazine/designing-a-rest-api-with-nodejs-and-mongodb-atlas
 */
+
+// An excellent explanation of Express and NodeJS and a good way to structure them: https://www.caffeinecoding.com/better-express-routing-for-nodejs/
+
+// Explaining modules in Node: https://stackabuse.com/how-to-use-module-exports-in-node-js/

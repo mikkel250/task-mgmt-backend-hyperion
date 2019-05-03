@@ -4,10 +4,28 @@ block content
   - var title = "Home"
 
 block content
-  h2.text-center Express App
-  
-  .row
-    .offset-sm-w.col-sm-8
-      .jumbotron.text-center
-        Welcome to your new Express App! Please visit the
-          #[a(href="https://github.com/rdegges/okta-express-login-portal", title="okkta-express-login-portal on GitHub") GitHub page] to learn more.
+  h2.text-center Welcome to the Task Manager #{name}
+  div.py-3
+    h3 Your current task list:
+    ul
+      if taskList
+        each task in taskList
+          li= task
+      else
+        p There are no tasks! Try creating one below.
+  div.row.py-3
+  .col-md-6.col-md-offset-3
+    h3.m-b-2 Create New Task
+    form(method='POST' action='/task/new').py-3
+      div.form-group
+        label(for='title') Task Title
+        input.form-control(type='text' id='title' placeholder='Enter a title, or default will be "Untitled Task"' name='title')
+      div.form-group
+        label(for='description') Description
+        input.form-control(type='description' id='description' placeholder='Enter a task description (optional)' name='description')
+      div.form-group
+        label(for='owner') Owner
+        input.form-control(type='owner' id='owner' placeholder='Enter a username if you want to assign this task to someone else.' name='owner')
+      button.btn.btn-primary(type='submit') Create Task
+
+//- https://stackoverflow.com/questions/41992107/iterate-mongodb-collection-to-pug

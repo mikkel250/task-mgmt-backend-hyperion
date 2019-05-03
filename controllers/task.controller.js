@@ -1,5 +1,5 @@
 const Task = require('../models/task.model.js');
-
+const username = require('../app');
     
     
 // create and save a new task
@@ -16,8 +16,9 @@ exports.create = (req, res) => {
     const task = new Task({
         title: req.body.title || "Untitled task",
         content: req.body.content,
-        creator: currentUSer,
-        owner: req.body.creator || currentUSer
+        creator: username,
+        owner: req.body.creator || username,
+        done: false
     });
 
     //save task in db

@@ -31,6 +31,8 @@ app.get('/', (req, res) => {
     return res.redirect(`/login`);
 });
 
+//NOTE: CAN PUT ALL THE BELOW ROUTING IN THE USER.ROUTES.JS FILE!
+
 // create the login GET and POST routes
 app.get('/login', (req, res) => {
     console.log('Inside the GET /login callback function...');
@@ -38,36 +40,27 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
+//https://stackoverflow.com/questions/41992107/iterate-mongodb-collection-to-pug
 app.post('/login', (req, res) => {
      username = req.body.username;
      let password = req.body.password;
     console.log(`inside login post callback. username: ${username}, password: ${password}`);
     //trying to connect instead of using this method
    // task.findOne({ username: username, password: password });
-    
+
     mongoose.connect(`mongodb+srv://${username}:${password}@hyperion-kovej.mongodb.net/test?retryWrites=true`, {
         useNewUrlParser: true
     }).then(() => {
         console.log("Successfully connected to database.");
-        res.render('index', {name: username})
+        let taskCollection = db.collection('task');
+        let taskList = taskCollection.find({ owner: username });
+        res.render('index', { name: username, taskList: taskList });
     }).catch(err => {
         console.log('Could not connect to database. Exiting now...', err);
         process.exit();
     });
-   // redirect to a different page just to test
-   
 });
 
-// route that requires authentication
-app.get('/authrequired', (req, res) => {
-    console.log(`Inside the GET /authrequired callback`);
-    console.log(`User authenticated? ${req.isAuthenticated()}`);
-    if (req.isAuthenticated()) {
-        res.send(`you hit the authentication endpoint\n`);
-    } else {
-        res.redirect('/');
-    }
-});
 
 // testing functionality
 app.get('/index', (req, res) => {

@@ -1,6 +1,9 @@
 module.exports = (app) => {
     const tasks = require('../controllers/task.controller.js');
 
+    // Render page to allow users to create new task -- MAYBE BEST TO LEAVE THIS FILE AS CRUD AND RENDER IN APP.JS
+   // app.get('/task/new', render('new'));
+
     // create new task
     app.post('/task', tasks.create);
 
@@ -15,6 +18,8 @@ module.exports = (app) => {
 
     //delete task with nodeId
     app.delete('/task/:taskId', tasks.delete);
+
+    
 
     // app.post('/loginSubmit', connectToDB(username, password));
 }
