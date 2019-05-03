@@ -59,7 +59,7 @@ app.post('/login', (req, res) => {
        // let taskCollection = test.collection('task');
         let taskList = app.get('/task');
         // store the username in DB HERE
-        // e.g. db.new({currentUser: username})
+        db.currentUser.update({ tag: "currentUser" }, { $set: { username: username } });
         res.render('index', { name: username, taskList: taskList });
 
         
