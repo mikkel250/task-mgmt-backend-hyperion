@@ -16,13 +16,13 @@ block content
   div.row.py-3
   .col-md-6.col-md-offset-3
     h3.m-b-2 Create New Task
-    form(method='POST' action='/task/new').py-3
+    form(method='POST' action='/task').py-3
       div.form-group
         label(for='title') Task Title
         input.form-control(type='text' id='title' placeholder='Enter a title, or default will be "Untitled Task"' name='title')
       div.form-group
-        label(for='description') Description
-        input.form-control(type='description' id='description' placeholder='Enter a task description (optional)' name='description')
+        label(for='content') Description
+        input.form-control(type='content' id='content' placeholder='Enter a task description (optional)' name='content')
       div.form-group
         label(for='owner') Owner
         input.form-control(type='owner' id='owner' placeholder='Enter a username if you want to assign this task to someone else.' name='owner')

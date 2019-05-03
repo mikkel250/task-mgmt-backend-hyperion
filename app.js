@@ -52,8 +52,8 @@ app.post('/login', (req, res) => {
         useNewUrlParser: true
     }).then(() => {
         console.log("Successfully connected to database.");
-        let taskCollection = db.collection('task');
-        let taskList = taskCollection.find({ owner: username });
+       // let taskCollection = test.collection('task');
+        let taskList = app.get('/task');
         res.render('index', { name: username, taskList: taskList });
     }).catch(err => {
         console.log('Could not connect to database. Exiting now...', err);

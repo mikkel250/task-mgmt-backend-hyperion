@@ -1,10 +1,9 @@
 const Task = require('../models/task.model.js');
-const username = require('../app');
+const app = require('../app');
     
     
 // create and save a new task
 exports.create = (req, res) => {
-    let currentUSer = req.session.userId;
     // validate request
     if (!req.body.content) {
         return res.status(400).send({
@@ -17,7 +16,7 @@ exports.create = (req, res) => {
         title: req.body.title || "Untitled task",
         content: req.body.content,
         creator: username,
-        owner: req.body.creator || username,
+        owner: req.body.creator || app.username,
         done: false
     });
 
