@@ -3,11 +3,17 @@ const express = require('express');
 // create the server
 const app = express();
 const session = require('express-session');
-//const FileStore = require('session-file-store')(session);
 const bodyParser = require('body-parser');
+// add & configure middleware
+app.use(bodyParser.urlencoded({ extended: true })); // use body-parser middleware to parse urls
+app.use(bodyParser.json()); // use body-parser middleware to parse JSON
+
 const mongoose = require("mongoose");
 const currentUserModel = require('./models/currentUser.js');
-// temporarily store the username 
+
+
+
+// temporarily store the username
 var username;
 
 // DB object to store username
@@ -22,9 +28,6 @@ app.set('view engine', 'pug');
 
 mongoose.Promise = global.Promise;
 
-// add & configure middleware
-app.use(bodyParser.urlencoded({ extended: false })); // use body-parser middleware to parse urls
-app.use(bodyParser.json()); // use body-parser middleware to parse JSON
 
 
 
