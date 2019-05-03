@@ -10,6 +10,9 @@ const mongoose = require("mongoose");
 // temporarily store the username 
 var username;
 
+// DB object to store username
+// var loggedInUser = 
+
 // add the routers for CRUD of tasks, users
 require('./routes/task.routes.js')(app);
 //require('./routes/user.routes.js')(app);
@@ -44,7 +47,7 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
      username = req.body.username;
     let password = req.body.password;
-    exports.username = username;
+    //exports.username = username;
     console.log(`inside login post callback. username: ${username}, password: ${password}`);
     //trying to connect instead of using this method
    // task.findOne({ username: username, password: password });
