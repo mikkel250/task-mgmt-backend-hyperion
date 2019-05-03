@@ -60,3 +60,13 @@ https://www.zeolearn.com/magazine/designing-a-rest-api-with-nodejs-and-mongodb-a
 // An excellent explanation of Express and NodeJS and a good way to structure them: https://www.caffeinecoding.com/better-express-routing-for-nodejs/
 
 // Explaining modules in Node: https://stackabuse.com/how-to-use-module-exports-in-node-js/
+
+/* ONGOING NOTES - WHAT I'M WORKING ON RIGHT NOW - 
+5/1 - 8pm 
+Create new task from GUI, getting:
+TypeError: Cannot read property 'content' of undefined
+
+I think it's not properly getting the request object/body, or the form is not submitting the POST correctly, somehow? the error indicates it's the index.js file. 
+
+
+*/

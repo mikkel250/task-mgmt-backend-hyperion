@@ -75,3 +75,9 @@ app.listen(3000, () => {
 
 module.exports = app;
 module.exports.username = username;
+
+// console.log(module.username);
+// //console.log(module.app.username);
+// console.log(module.exports);
+// console.log(module.id);
+console.log(username);
