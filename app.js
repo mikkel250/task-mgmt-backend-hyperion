@@ -43,7 +43,8 @@ app.get('/login', (req, res) => {
 //https://stackoverflow.com/questions/41992107/iterate-mongodb-collection-to-pug
 app.post('/login', (req, res) => {
      username = req.body.username;
-     let password = req.body.password;
+    let password = req.body.password;
+    exports.username = username;
     console.log(`inside login post callback. username: ${username}, password: ${password}`);
     //trying to connect instead of using this method
    // task.findOne({ username: username, password: password });
@@ -54,7 +55,11 @@ app.post('/login', (req, res) => {
         console.log("Successfully connected to database.");
        // let taskCollection = test.collection('task');
         let taskList = app.get('/task');
+        // store the username in DB HERE
+        // e.g. db.new({currentUser: username})
         res.render('index', { name: username, taskList: taskList });
+
+        
     }).catch(err => {
         console.log('Could not connect to database. Exiting now...', err);
         process.exit();
@@ -74,10 +79,10 @@ app.listen(3000, () => {
 });
 
 module.exports = app;
-module.exports.username = username;
+
 
 // console.log(module.username);
 // //console.log(module.app.username);
 // console.log(module.exports);
 // console.log(module.id);
-console.log(username);
+//console.log(username);
