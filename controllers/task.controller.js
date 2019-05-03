@@ -1,7 +1,10 @@
 const Task = require('../models/task.model.js');
+const currentUserModel = require('../models/currentUser.js');
+var currentUser = currentUserModel.findOne({ tag: "currentUser" });
 const app = require('../app.js');
-// const user = require('currentUser');
-    
+
+
+
 // create and save a new task
 exports.create = (req, res) => {
     // validate request
@@ -15,8 +18,8 @@ exports.create = (req, res) => {
     const task = new Task({
         title: req.body.title || "Untitled task",
         content: req.body.content,
-        creator: app.username,
-        owner: req.body.owner || app.username,
+        creator: currentUser.username,
+        owner: req.body.owner || currentUser.username,
         done: false
     });
 
@@ -33,7 +36,7 @@ exports.create = (req, res) => {
 
 // retrieve and return all tasks from the db
 exports.findAll = (req, res) => {
-    Task.find({ creator: app.username })
+    Task.find({ creator: currentUser.username })
     .then(tasks => {
         res.send(tasks);
     }).catch(err => {
@@ -52,7 +55,7 @@ exports.findOne = (req, res) => {
                 message: `task not found with id ${req.params.taskId}`
             });
         }
-        if (task.owner === !app.username || task.creator === !app.username) {
+        if (task.owner === !currentUser.username || task.creator === !currentUser.username) {
             res.status(400).send({ message: 'Sorry, only the task owner or creator can perform this action.' });
         } else { res.send(task) };
     }).catch(err => {
@@ -70,7 +73,7 @@ exports.findOne = (req, res) => {
 // update a task identified by taskId in the request
 exports.update = (req, res) => {
     // Check if owner
-    if (task.owner === !app.username || task.creator === !app.username) {
+    if (task.owner === !currentUser.username || task.creator === !currentUser.username) {
         res.status(400).send({ message: 'Sorry, only the task owner or creator can perform this action.' });
     }
     //Validate request
@@ -114,7 +117,7 @@ exports.delete = (req, res) => {
             });
         }
         // Check if owner
-        if (task.owner === !app.username || task.creator === !app.username) {
+        if (task.owner === !currentUser.username || task.creator === !currentUser.username) {
             res.status(400).send({ message: 'Sorry, only the task owner or creator can perform this action.' });
         }
         res.send({ message: "task deleted successfully!" });

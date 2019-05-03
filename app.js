@@ -60,7 +60,7 @@ app.post('/login', (req, res) => {
         let taskList = app.get('/task');
         // store the username in DB HERE
         const query = { tag: 'currentUser' };
-        currentUserModel.findOneAndUpdate(query, { username: username }, { new: true, useFindAndModify: false}, () => {console.log("added username")});
+        currentUserModel.findOneAndUpdate(query, { username: username }, { new: true, useFindAndModify: false}, () => {});
         res.render('index', { name: username, taskList: taskList });
 
         
@@ -90,4 +90,4 @@ module.exports = app;
 // console.log(module.exports);
 // console.log(module.id);
 //console.log(username);
-console.log(currentUserModel.findOne({ tag: "currentUser" }));
+//console.log(currentUserModel.findOne({ tag: "currentUser" }));

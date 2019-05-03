@@ -68,5 +68,7 @@ TypeError: Cannot read property 'content' of undefined
 
 I think it's not properly getting the request object/body, or the form is not submitting the POST correctly, somehow? the error indicates it's the index.js file. 
 
+The ID of currentUser is 5ccca51116eade2a310b5a04
+in case want to use findByIdAndUpdate
 
 */
