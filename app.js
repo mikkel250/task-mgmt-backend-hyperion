@@ -6,12 +6,12 @@ const session = require('express-session');
 //const FileStore = require('session-file-store')(session);
 const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
-const currentUser = require('./models/currentUser.js');
+const currentUserModel = require('./models/currentUser.js');
 // temporarily store the username 
 var username;
 
 // DB object to store username
-
+var currentUser = currentUserModel.findOne({ tag: "currentUser" });
 
 // add the routers for CRUD of tasks, users
 require('./routes/task.routes.js')(app);
@@ -59,7 +59,8 @@ app.post('/login', (req, res) => {
        // let taskCollection = test.collection('task');
         let taskList = app.get('/task');
         // store the username in DB HERE
-        currentUser.update({ tag: "currentUser" }, { $set: { username: username } });
+        const query = { tag: 'currentUser' };
+        currentUserModel.findOneAndUpdate(query, { username: username }, { new: true, useFindAndModify: false}, () => {console.log("added username")});
         res.render('index', { name: username, taskList: taskList });
 
         
@@ -89,3 +90,4 @@ module.exports = app;
 // console.log(module.exports);
 // console.log(module.id);
 //console.log(username);
+console.log(currentUserModel.findOne({ tag: "currentUser" }));
