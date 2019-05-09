@@ -2,6 +2,10 @@ const Task = require('../models/task.model.js');
 const currentUserModel = require('../models/currentUser.js');
 var currentUser = currentUserModel.findOne({ tag: "currentUser" });
 const app = require('../app.js');
+// const bodyParser = require('body-parser');
+// app.use(bodyParser.urlencoded({ extended: false })); // use body-parser middleware to parse urls
+// app.use(bodyParser.json()); // use body-parser middleware to parse JSON
+
 
 
 
