@@ -69,6 +69,20 @@ TypeError: Cannot read property 'content' of undefined
 I think it's not properly getting the request object/body, or the form is not submitting the POST correctly, somehow? the error indicates it's the index.js file. 
 
 The ID of currentUser is 5ccca51116eade2a310b5a04
-in case want to use findByIdAndUpdate
+in case want to use findByIdAndUpdate instead of filtering by a different field
 
-*/
+- Need to add due dates to the task model
+- Figure out the filters. Filter tasks by:
+■ Completed tasks
+■ Tasks that must still be completed
+■ Deadline -- Note: this is a POST
+■ Tasks that are overdue
+■ All tasks completed within the last month
+
+---> Add a date picker or similar to view index.pug? DONE
+
+TO FIX
+Tasks are being saved in the collection 'tasks' (v able to save), whereas I apparently created the user in 'task', so this might be part of the prob -- IT WAS 'TASKS' IN THE ROUTER (TASK.ROUTES.JS). CHANGED 5/4
+
+
+*/ 

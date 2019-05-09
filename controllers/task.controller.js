@@ -20,6 +20,7 @@ exports.create = (req, res) => {
         content: req.body.content,
         creator: currentUser.username,
         owner: req.body.owner || currentUser.username,
+        due_date: req.body.due_date,
         done: false
     });
 
@@ -35,8 +36,8 @@ exports.create = (req, res) => {
 };
 
 // retrieve and return all tasks from the db
-exports.findAll = (req, res) => {
-    Task.find({ creator: currentUser.username })
+exports.findAll = (req, res, ) => {
+    Task.find({ owner: currentUser.username })
     .then(tasks => {
         res.send(tasks);
     }).catch(err => {
@@ -45,6 +46,56 @@ exports.findAll = (req, res) => {
         });
     });
 };
+
+// retrieve and return all completed tasks from the db
+exports.findAllCompleted = (req, res) => {
+    Task.find({ owner: currentUser.username, done: true})
+        .then(tasks => {
+            res.send(tasks);
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving tasks."
+            });
+        });
+};
+
+// retrieve and return all incomplete tasks from the db
+exports.findAllIncomplete = (req, res) => {
+    Task.find({ owner: currentUser.username, done: false})
+        .then(tasks => {
+            res.send(tasks);
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving tasks."
+            });
+        });
+};
+
+// retrieve and return all tasks by due date from the db
+exports.findAllByDate = (req, res) => {
+    Task.find({ owner: currentUser.username, due_date: req.body.due_date})
+        .then(tasks => {
+            res.render('/filter', { taskList: tasks });
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving tasks."
+            });
+        });
+};
+
+// retrieve and return all overdue tasks
+exports.findAllOverdue = (req, res) => {
+    let now = new Date();
+    Task.find({ owner: currentUser.username, $lte: { due_date: now } })
+        .then(tasks => {
+            res.send(tasks);
+        }).catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving tasks."
+            });
+        });
+};
+
 
 // find a single task with taskId
 exports.findOne = (req, res) => {
@@ -133,3 +184,8 @@ exports.delete = (req, res) => {
     });
 };
 
+// serve up the filter page
+exports.filter = (req, res) => {
+    let taskList = app.taskList;
+    res.render('filter', { taskList: taskList });
+};

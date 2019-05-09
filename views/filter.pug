@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  - var title = "Search and Filter"
+
+block content
+  h2.text-center Welcome to the Task Manager Filter page
+  div.py-3
+    h3 Your current task list:
+    ul
+      if taskList
+        each task in taskList
+          li= task
+      else
+        p There are no tasks! 
+  
+  div.row.py-3
+  .col-md-6.col-md-offset-3
+    h4.m-b-2 Filter Options
+    form(method='GET' action='/task/completed').py-3
+      button.btn.btn-primary(type='submit') Find Completed
+    form(method='GET' action='/task/completed').py-3
+      button.btn.btn-warning(type='submit') Find Incomplete
+    form(method='GET' action='/task/incomplete').py-3
+      button.btn.btn-danger(type='submit') Find Overdue
+    form(method='POST' action='/task/due').py-3
+      div.form-group
+        label(for='due') Find by due date and all tasks due on or before will be shown
+        input.form-control(type='Date' id='due' placeholder='Enter a MM/DD/YYYY due date ' name='due') 
+        //apparently the above creates a datepicker (type, I'm guessing)
+      button.btn.btn-primary(type='submit') Find by Due Date
+
+//- https://stackoverflow.com/questions/41992107/iterate-mongodb-collection-to-pug

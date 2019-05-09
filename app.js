@@ -35,6 +35,7 @@ app.get('/', (req, res) => {
 });
 
 //NOTE: CAN PUT ALL THE BELOW ROUTING IN THE USER.ROUTES.JS FILE!
+// BUT need to write the user controller first if that is the desire
 
 // create the login GET and POST routes
 app.get('/login', (req, res) => {
@@ -47,16 +48,18 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => {
      username = req.body.username;
     let password = req.body.password;
+    
+    // The below should not be necessary as the strategy changed to save the current user in the DB on login
     //exports.username = username;
+    
     console.log(`inside login post callback. username: ${username}, password: ${password}`);
-    //trying to connect instead of using this method
-   // task.findOne({ username: username, password: password });
+    
 
     mongoose.connect(`mongodb+srv://${username}:${password}@hyperion-kovej.mongodb.net/test?retryWrites=true`, {
         useNewUrlParser: true
     }).then(() => {
         console.log("Successfully connected to database.");
-       // let taskCollection = test.collection('task');
+       
         let taskList = app.get('/task');
         // store the username in DB HERE
         const query = { tag: 'currentUser' };

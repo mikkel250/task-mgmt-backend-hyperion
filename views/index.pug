@@ -7,12 +7,14 @@ block content
   h2.text-center Welcome to the Task Manager #{name}
   div.py-3
     h3 Your current task list:
+    a(href="/filter") Search and filter tasks
     ul
       if taskList
         each task in taskList
           li= task
       else
         p There are no tasks! Try creating one below.
+  
   div.row.py-3
   .col-md-6.col-md-offset-3
     h3.m-b-2 Create New Task
@@ -23,6 +25,10 @@ block content
       div.form-group
         label(for='content') Description
         input.form-control(type='text' id='content' placeholder='Enter a task description (optional)' name='content')
+      div.form-group
+        label(for='due') Due Date
+        input.form-control(type='Date' id='due' placeholder='Enter a MM/DD/YYYY due date' name='due') 
+        //apparently the above creates a datepicker (type, I'm guessing)
       div.form-group
         label(for='owner') Owner
         input.form-control(type='text' id='owner' placeholder='Enter a username if you want to assign this task to someone else.' name='owner')
